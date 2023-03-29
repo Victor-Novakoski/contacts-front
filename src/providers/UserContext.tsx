@@ -54,37 +54,25 @@ export const UserContextProvider = ({ children }: IUserProviderProps) => {
   const [user, setUser] = useState<IUser | null>(null)
   const [modalConfigVisible, setModalConfigVisible] = useState(false)
   const [token, setToken] = useState('')
-  const { setRecentContact } = useContactContext()
 
   const navigate = useNavigate()
-
-
-  // useEffect(() => {
-  //   if (token) {
-  //     profile()
-  //   }
-  // }, [])
-
-  // const profile = async () => {
-  //   try {
-  //     const dataUser = await api.get('/users/profile')
-  //     setUser(dataUser.data)
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
 
   const loginFunction = (formLogin: IUserLogin) => {
     api
       .post('/auth', formLogin)
       .then(resp => {
         setToken(resp.data.token)
-        api.defaults.headers.common.Authorization = `Bearer ${resp.data.token}`
-        api.get('/users/profile').then(resp => {
-          setUser(resp.data)
-          navigate('/home', { replace: true })
-          toast.success(`bem vindo ${resp.data.name}`)
-        })
+        api
+          .get('/users/profile', {
+            headers: {
+              Authorization: `Bearer ${resp.data.token}`,
+            },
+          })
+          .then(resp => {
+            setUser(resp.data)
+            navigate('/home', { replace: true })
+            toast.success(`bem vindo ${resp.data.name}`)
+          })
       })
       .catch(err => toast.error('email ou senha inválido'))
   }
