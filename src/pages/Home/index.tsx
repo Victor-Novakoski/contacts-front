@@ -11,15 +11,19 @@ export function Home() {
   const { loadContact } = useContactContext()
 
   useEffect(() => {
-    if (token) {
-      loadContact()
-    }
+    loadContact()
   }, [])
 
   return (
     <Container>
-      <UserInfo />
-      <RecentContacts />
+      {token ? (
+        <>
+          <UserInfo />
+          <RecentContacts />
+        </>
+      ) : (
+        <Navigate to={'/'} />
+      )}
     </Container>
   )
 }

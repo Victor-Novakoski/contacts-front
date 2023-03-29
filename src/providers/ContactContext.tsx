@@ -7,6 +7,7 @@ import {
   useState,
 } from 'react'
 import { toast } from 'react-toastify'
+import { RecentContacts } from '../components/RecentContacts'
 import api from '../services/api'
 import { IUserProviderProps, useUserContext } from './UserContext'
 
@@ -56,8 +57,11 @@ export const ContactProvider = ({ children }: IUserProviderProps) => {
 
   const loadContact = async () => {
     try {
-      api.defaults.headers.common.Authorization = `Bearer ${token}`
-      const { data } = await api.get('/contact')
+      const { data } = await api.get('/contact', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       setRecentContact(data)
     } catch (error) {
       console.log(error)
@@ -93,7 +97,7 @@ export const ContactProvider = ({ children }: IUserProviderProps) => {
         Object.entries(formData).filter(([_, v]) => v != '')
       )
       const { data } = await api.patch(`/contact/${contactId}`, newData)
-      setRecentContact(data)
+      setRecentContact(recentContact?.map(e => (e.id === data.id ? data : e)))
       toast.success('contato atualizado com sucesso')
     } catch (error) {
       console.log(error)
