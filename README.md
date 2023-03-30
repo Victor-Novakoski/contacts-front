@@ -13,9 +13,12 @@ Clone o projeto
 Entre no diretório do projeto
 ```shel
   cd customer-base-frontEnd
+```
   ou
+  
+```shel
   code .
-```  
+```
 
 
 Instale as dependências
