@@ -6,13 +6,13 @@ Rodando localmente
 Clone o projeto
 
 ```shel
-  git@github.com:Victor-Novakoski/customer-base-backEnd.git
+  git@github.com:Victor-Novakoski/customer-base-frontEnd.git
 ```  
 
 
 Entre no diretório do projeto
 ```shel
-  cd customer-base-backEnd
+  cd customer-base-frontEnd
 ```  
 
 
