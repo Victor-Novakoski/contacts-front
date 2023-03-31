@@ -16,17 +16,14 @@ export function RecentContacts() {
 
   const searchLowerCase = search.toLocaleLowerCase()
 
-  const filteredContacts = recentContact?.filter(
-    e => e.name.toLowerCase().includes(searchLowerCase),
-    loadContact()
-  )
+  // const filteredContacts = recentContact?.filter(
+  //   e => e.name.toLowerCase().includes(searchLowerCase)
+  // )
 
-  // const filteredContacts =
-  //   search.length > 0
-  //     ? recentContact?.filter(contact =>
-  //         contact.name.toLowerCase().includes(search)
-  //       )
-  //     : recentContact
+  const filteredContacts =
+    search.length > 0
+      ? recentContact?.filter(contact => contact.name.includes(searchLowerCase))
+      : recentContact
 
   return (
     <RecentStyle>

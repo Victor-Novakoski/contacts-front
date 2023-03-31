@@ -6,7 +6,8 @@ import { IUser, useUserContext } from '../../providers/UserContext'
 import { ModalStyle } from '../ModalAddContact/style'
 
 function ModalUserConfig() {
-  const { patchUser, setModalConfigVisible } = useUserContext()
+  const { patchUser, setModalConfigVisible, deleteUser } =
+    useUserContext()
 
   const formSchema = Yup.object().shape({
     name: Yup.string().notRequired(),
@@ -58,6 +59,12 @@ function ModalUserConfig() {
           <p>{errors.imageProfile?.message}</p>
 
           <button>atualizar perfil</button>
+          <span
+            className="deleteBtnContacts"
+            onClick={() => deleteUser()}
+          >
+            excluir Contato
+          </span>
         </form>
       </div>
     </ModalStyle>

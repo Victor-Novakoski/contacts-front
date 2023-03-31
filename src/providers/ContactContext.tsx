@@ -67,6 +67,7 @@ export const ContactProvider = ({ children }: IUserProviderProps) => {
       console.log(error)
     }
   }
+
   const createContactFunc = async (formData: IcontactRequest) => {
     try {
       const { data } = await api.post('/contact', formData)
@@ -103,6 +104,7 @@ export const ContactProvider = ({ children }: IUserProviderProps) => {
       console.log(error)
     }
   }
+  console.log(token)
 
   return (
     <ContactContext.Provider

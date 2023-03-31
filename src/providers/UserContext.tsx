@@ -46,6 +46,7 @@ interface IUserContext {
   setModalConfigVisible: Dispatch<SetStateAction<boolean>>
   token: string
   setToken: Dispatch<string>
+  deleteUser(): void
 }
 
 export const AuthContext = createContext<IUserContext>({} as IUserContext)
@@ -90,6 +91,18 @@ export const UserContextProvider = ({ children }: IUserProviderProps) => {
     }
   }
 
+  const deleteUser = (): void => {
+    try {
+      api.delete(`/users/profile`)
+      toast.success('Contato excluido com sucesso')
+      setToken('')
+      setUser(null)
+      navigate('/', { replace: true })
+    } catch (error) {
+      toast.error('algo deu errado')
+    }
+  }
+
   const registerSubmit = (formRegister: IUserRegister) => {
     try {
       const newData = Object.fromEntries(
@@ -121,6 +134,7 @@ export const UserContextProvider = ({ children }: IUserProviderProps) => {
         patchUser,
         token,
         setToken,
+        deleteUser,
       }}
     >
       {children}
