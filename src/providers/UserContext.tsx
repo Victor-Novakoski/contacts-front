@@ -83,7 +83,11 @@ export const UserContextProvider = ({ children }: IUserProviderProps) => {
       const newData = Object.fromEntries(
         Object.entries(formData).filter(([_, v]) => v != '')
       )
-      const { data } = await api.patch('/users/profile', newData)
+      const { data } = await api.patch('/users/profile', newData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       setUser(data)
       toast.success('usuario atualizado com sucesso')
     } catch (error) {
@@ -93,7 +97,11 @@ export const UserContextProvider = ({ children }: IUserProviderProps) => {
 
   const deleteUser = (): void => {
     try {
-      api.delete(`/users/profile`)
+      api.delete(`/users/profile`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       toast.success('Contato excluido com sucesso')
       setToken('')
       setUser(null)
@@ -109,6 +117,7 @@ export const UserContextProvider = ({ children }: IUserProviderProps) => {
         Object.entries(formRegister).filter(([_, v]) => v != '')
       )
       api.post('/users', newData)
+      navigate('/', { replace: true })
       toast.success('conta criada com sucesso!')
     } catch (error) {
       toast.error(`ops, algo de errado`)
@@ -142,7 +151,7 @@ export const UserContextProvider = ({ children }: IUserProviderProps) => {
   )
 }
 
-export function useUserContext(): IUserContext {
+export const useUserContext = (): IUserContext => {
   const context = useContext(AuthContext)
 
   return context

@@ -7,6 +7,7 @@ import {
   IcontactRequest,
   useContactContext,
 } from '../../providers/ContactContext'
+import InputMask from 'react-input-mask'
 
 function Modal() {
   const { createContactFunc, setModalVisible } = useContactContext()
@@ -46,7 +47,11 @@ function Modal() {
           <p>{errors.email?.message}</p>
 
           <label>telefone</label>
-          <input type="text" {...register('phone')} />
+          <InputMask
+            mask="(99)9 9999-9999"
+            type="text"
+            {...register('phone')}
+          />
           <p>{errors.phone?.message}</p>
 
           <button>Cadastrar Contato</button>

@@ -7,6 +7,8 @@ export const LoginPage = styled.section`
   align-items: center;
   flex-direction: column;
   width: 100%;
+  position: relative;
+  z-index: 5;
 
   a {
     background-color: var(--Color-segundary);
@@ -18,17 +20,6 @@ export const LoginPage = styled.section`
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-
-  figure {
-    text-align: center;
-    margin-bottom: 1.5rem;
-    width: 50%;
-    max-width: 144px;
-
-    img {
-      width: 100%;
-    }
   }
 
   span {
@@ -45,6 +36,9 @@ export const LoginPage = styled.section`
     font-weight: 900;
   }
 
+  button :hover {
+  }
+
   div {
     width: 90%;
     max-width: 369px;
@@ -55,6 +49,8 @@ export const LoginPage = styled.section`
     padding: 42px 22px;
     gap: 3rem;
     border-radius: 10px;
+    position: absolute;
+    z-index: 10;
   }
 
   h3 {

@@ -70,7 +70,11 @@ export const ContactProvider = ({ children }: IUserProviderProps) => {
 
   const createContactFunc = async (formData: IcontactRequest) => {
     try {
-      const { data } = await api.post('/contact', formData)
+      const { data } = await api.post('/contact', formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       setCreateContact([...createContact, data])
       loadContact()
       toast.success('contato adicionado com sucesso')
@@ -81,7 +85,11 @@ export const ContactProvider = ({ children }: IUserProviderProps) => {
 
   const deleteContact = (id: string): void => {
     try {
-      api.delete(`/contact/${id}`)
+      api.delete(`/contact/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       toast.success('Contato excluido com sucesso')
       const newContact = recentContact?.filter(
         currentContact => currentContact.id !== id
@@ -97,14 +105,17 @@ export const ContactProvider = ({ children }: IUserProviderProps) => {
       const newData = Object.fromEntries(
         Object.entries(formData).filter(([_, v]) => v != '')
       )
-      const { data } = await api.patch(`/contact/${contactId}`, newData)
+      const { data } = await api.patch(`/contact/${contactId}`, newData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       setRecentContact(recentContact?.map(e => (e.id === data.id ? data : e)))
       toast.success('contato atualizado com sucesso')
     } catch (error) {
       console.log(error)
     }
   }
-  console.log(token)
 
   return (
     <ContactContext.Provider
@@ -130,7 +141,7 @@ export const ContactProvider = ({ children }: IUserProviderProps) => {
   )
 }
 
-export function useContactContext(): IContactContext {
+export const useContactContext = (): IContactContext => {
   const context = useContext(ContactContext)
 
   return context

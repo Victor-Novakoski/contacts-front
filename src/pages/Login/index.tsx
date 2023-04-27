@@ -33,7 +33,6 @@ function Login() {
   })
   return (
     <LoginPage className="animate__animated animate__fadeIn">
-      <figure></figure>
       <div>
         <h3>Login</h3>
         <form action="" onSubmit={handleSubmit(loginFunction)}>

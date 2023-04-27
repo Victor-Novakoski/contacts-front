@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form'
 import 'animate.css'
 import { useUserContext } from '../../providers/UserContext'
 import { yupResolver } from '@hookform/resolvers/yup'
+import InputMask from 'react-input-mask'
 
 export interface IUserRegister {
   name: string
@@ -18,9 +19,6 @@ export interface IUserRegister {
 function Register() {
   const { registerSubmit } = useUserContext()
 
-  const regexPhone =
-    /^\s*(\d{2}|\d{0})[-. ]?(\d{5}|\d{4})[-. ]?(\d{4})[-. ]?\s*$/
-
   const formSchema = Yup.object().shape({
     name: Yup.string().required('Nome obrigatório'),
     email: Yup.string().required('Email obrigatório').email('Email inválido'),
@@ -29,7 +27,7 @@ function Register() {
       [Yup.ref('password')],
       'Confirmação de senha deve ser igual a senha'
     ),
-    phone: Yup.string().required('telefone obrigatório').matches(regexPhone),
+    phone: Yup.string().required('telefone obrigatório'),
     imageProfile: Yup.string()
       .default(
         'https://argumentumpericias.com.br/biblioteca/2019/09/sem-imagem-avatar.png'
@@ -102,9 +100,10 @@ function Register() {
 
           <DivInput>
             <label htmlFor="phone">telefone</label>
-            <input
+            <InputMask
               id="phone"
               placeholder="(99) 99999-9999"
+              mask='(99)9 9999-9999'
               {...register('phone')}
             />
             <p>{errors.phone?.message}</p>
