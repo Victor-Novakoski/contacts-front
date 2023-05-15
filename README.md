@@ -1,4 +1,4 @@
-# customer-base-frontEnd
+# contacts-front
 *customer-base*
 Este é um aplicativo no qual você pode gerenciar seus contatos de maneira simples e fácil.
 
@@ -6,7 +6,7 @@ Rodando localmente
 Clone o projeto
 
 ```shel
-  git@github.com:Victor-Novakoski/customer-base-frontEnd.git
+  git@github.com:Victor-Novakoski/contacts-front.git
 ```  
 
 
